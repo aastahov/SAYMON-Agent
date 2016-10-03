@@ -10,14 +10,18 @@ ADD http://www.saymon.info/downloads/saymon-agent-rl-linux-x64-jre.tar.gz /opt
 RUN tar xvf /opt/saymon-agent-rl-linux-x64-jre.tar.gz -C /opt/. \
 && rm /opt/saymon-agent-rl-linux-x64-jre.tar.gz
 RUN adduser --system --no-create-home saymon \
+&& mkdir /opt/saymon-agent/scripts \
 && chown -R saymon:nogroup /opt/saymon-agent
 
 RUN mkdir /var/log/saymon \
 && chown -R saymon:nogroup /var/log/saymon
 
 VOLUME /var/log/saymon
+VOLUME /opt/saymon-agent/scripts
 
 USER saymon
+
+WORKDIR /opt/saymon-agent
 
 ENTRYPOINT ["/bin/bash"]
 
